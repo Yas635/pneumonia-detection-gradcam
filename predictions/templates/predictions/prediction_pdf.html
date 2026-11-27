@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Rapport de Prédiction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 40px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+
+        p {
+            font-size: 1.1em;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: #007BFF;
+        }
+
+        .result {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #FF5733;  
+        }
+
+        .image-container {
+            text-align: center;
+            margin-top: 20px;
+            page-break-inside: avoid; 
+            padding: 20px;
+            border: 1px solid #ddd; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+            background-color: #f9f9f9; 
+            margin-bottom: 40px;
+        }
+
+        .image-container img {
+            width: auto; 
+            height: 350px;
+            border-radius: 8px; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+            margin-top: 15px;
+        }
+
+        .section-title {
+            color: #4CAF50;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.3em;
+        }
+
+
+        @media print {
+            .image-container img {
+                max-width: 100%; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Rapport de Prédiction</h1>
+    <p><strong>Nom:</strong> {{ nom }}</p>
+    <p><strong>Âge:</strong> {{ age }}</p>
+    <p><strong>Prédiction:</strong> <span class="result">{{ prediction }}</span></p>
+    <p><strong>Date de prédiction:</strong> {{ prediction_date }}</p>
+
+    <div class="image-container">
+        <h2 class="section-title">Image d'entrée</h2>
+        <img src="{{ image_path }}" alt="Image d'entrée">
+    </div>
+
+    <div class="image-container">
+        <h2 class="section-title">Overlay (superposition)</h2>
+        <img src="{{ overlay_url }}" alt="Image Overlay">
+    </div>
+
+    <div class="image-container">
+        <h2 class="section-title">Image Grad-CAM</h2>
+        <img src="{{ grad_cam_url }}" alt="Image Grad-CAM">
+    </div>
+
+    
+    
+</body>
+</html>

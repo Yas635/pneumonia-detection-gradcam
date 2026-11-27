@@ -1,0 +1,146 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prédiction de Pneumonie</title>
+    
+    <link href="{% static 'styles.css' %}" rel="stylesheet">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">PneumoPredict</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#home">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#prediction">Prédiction</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">A propos</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard/">Dashboard</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    
+    <section id="home" class="py-5 text-center bg-primary ">
+        <div class="container">
+            <h1 class="display-4">Bienvenue sur PneumoPredict</h1>
+            <p class="lead">Un outil puissant pour détecter la pneumonie à partir d'images radiologiques.</p>
+            <a href="#prediction" class="btn btn-light btn-lg">Commencez maintenant</a>
+        </div>
+    </section>
+
+    
+    <section id="prediction" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Prédiction de Pneumonie</h2>
+            <form method="POST" enctype="multipart/form-data" class="mt-4">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Donner le Rapport</button>
+            </form>
+            
+            {% if prediction %}
+                <div class="alert alert-success mt-4">
+                    <strong>Résultat :</strong> {{ prediction }}
+                </div>
+            {% endif %}
+
+            
+            {% if error %}
+                <div class="alert alert-danger mt-4">
+                    {{ error }}
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+    
+
+    <section id="about" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-4">A propos</h2>
+            <p class="text-center">PneumoPredict est un projet éducatif : un modèle DenseNet121 classe des radiographies thoraciques (Normal / Pneumonie) et la prédiction est expliquée par une carte de chaleur Grad-CAM. Cet outil ne remplace en aucun cas un avis médical.</p>
+        </div>
+    </section>
+
+    
+<section id="resources" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-4">Ressources Éducatives sur la Pneumonie</h2>
+
+        <div class="row">
+
+            <div class="col-md-4">
+                <h3 class="text-center">Vidéos</h3>
+                <div class="video-container mb-3">
+                    <iframe width="100%" height="215" src="https://www.youtube.com/embed/qFrOCdIWfGI" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <p class="text-center">Vidéo expliquant les traitements de la pneumonie.</p>
+            </div>
+            <div class="col-md-4">
+                <h3 class="text-center">Vidéos</h3>
+                <div class="video-container mb-3">
+                    <iframe width="100%" height="215" src="https://www.youtube.com/embed/JE3EwB6XP00" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <p class="text-center">Vidéo sur les mesures préventives contre la pneumonie.</p>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            
+            <div class="col-md-6">
+                <h3>Articles</h3>
+                <ul>
+                    <li><a href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.who.int/fr/news-room/fact-sheets/detail/pneumonia%23:~:text%3DLa%2520pneumonie%2520est%2520une%2520forme,une%2520personne%2520en%2520bonne%2520sant%25C3%25A9.&ved=2ahUKEwjQ5cuTrc2KAxWcB9sEHZxSKT4QFnoECBoQAw&usg=AOvVaw1vyODHBJue-a8e8d8eCXvs" target="_blank">Article 1: Comprendre la pneumonie</a></li>
+                    <li><a href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.passeportsante.net/fr/Maux/Problemes/Fiche.aspx%3Fdoc%3Dpneumonie-pm-prevention-de-la-pneumonie&ved=2ahUKEwiO7dikrc2KAxWuSfEDHaK_HAoQFnoECDAQAQ&usg=AOvVaw3xxNP_3Ix0LP8VwwJxDPql" target="_blank">Article 2: Comment prévenir la pneumonie</a></li>
+                    <li><a href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.vidal.fr/maladies/voies-respiratoires/pneumonie/traitements.html&ved=2ahUKEwiw4Mm0rc2KAxW3Z_EDHfvOGb4QFnoECBUQAQ&usg=AOvVaw3PgjB_IErlSHwgAu_R2oA-" target="_blank">Article 3: Traitements modernes de la pneumonie</a></li>
+                </ul>
+            </div>
+
+            
+            <div class="col-md-6">
+                <h3>Organisations Médicales</h3>
+                <ul>
+                    <li><a href="https://www.who.int" target="_blank">Organisation mondiale de la santé (OMS)</a></li>
+                    <li><a href="https://www.cdc.gov" target="_blank">Centres pour le contrôle et la prévention des maladies (CDC)</a></li>
+                    <li><a href="https://www.pneumonia.org" target="_blank">American Lung Association - Pneumonia</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    
+    <footer class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <p>&copy; 2024 PneumoPredict. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+
+
+</body>
+</html>
+
